@@ -1,0 +1,27 @@
+{
+    "name": "atshike/pwlh",
+    "type": "library",
+    "description": "The Laravel WorkerMan App.",
+    "keywords": ["laravel", "workerman"],
+    "license": "Apache",
+    "require": {
+        "php": ">=8.1",
+        "laravel/framework": ">=10"
+    },
+    "authors": [
+        {
+            "name": "atshike",
+            "email": "atshike@foxmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "atshike\\pwlh\\": "src/"
+        }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.10",
+        "workerman/gateway-worker": "^3.1",
+        "workerman/workerman": "^4.1"
+    }
+}
