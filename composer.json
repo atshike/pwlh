@@ -3,7 +3,7 @@
     "type": "library",
     "description": "The Laravel WorkerMan App.",
     "keywords": ["laravel", "workerman"],
-    "license": "Apache",
+    "license": "MIT",
     "require": {
         "php": ">=8.1",
         "laravel/framework": ">=10"
