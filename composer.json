@@ -23,5 +23,6 @@
         "laravel/pint": "^1.10",
         "workerman/gateway-worker": "^3.1",
         "workerman/workerman": "^4.1"
-    }
+    },
+    "minimum-stability": "dev"
 }

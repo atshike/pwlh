@@ -2,7 +2,6 @@
 
 namespace atshike\plwh\Commands;
 
-
 use atshike\plwh\Events\WorkermanEvents;
 use GatewayWorker\BusinessWorker;
 use GatewayWorker\Gateway;
