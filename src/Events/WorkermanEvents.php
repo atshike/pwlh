@@ -1,6 +1,6 @@
 <?php
 
-namespace atshike\plwh\Events;
+namespace atshike\pwlh\Events;
 
 use GatewayWorker\Lib\Gateway;
 

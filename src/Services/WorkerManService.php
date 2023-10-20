@@ -1,58 +1,26 @@
 <?php
 
-namespace atshike\plwh\Commands;
+namespace atshike\pwlh\Services;
 
-use atshike\plwh\Events\WorkermanEvents;
+use atshike\pwlh\Events\WorkermanEvents;
 use GatewayWorker\BusinessWorker;
 use GatewayWorker\Gateway;
 use GatewayWorker\Register;
-use Illuminate\Console\Command;
 use Workerman\Worker;
 
-class WorkerManCommand extends Command
+class WorkerManService
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:workman {action} {--d}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
-
-    /**
-     * Execute the console command.
-     */
-    public function handle(): void
+    public static function start(): void
     {
-        global $argv;
-        $action = $this->argument('action');
-        if (! in_array($action, ['status', 'start', 'stop', 'restart', 'reload', 'connections'])) {
-            exit("action invalid! \n");
-        }
-        $argv[0] = 'wk';
-        $argv[1] = $action;
-        $argv[2] = $this->option('d') ? '-d' : '';
-
-        $this->start();
-    }
-
-    private function start(): void
-    {
-        $this->startGateWay();
-        $this->startBusinessWorker();
-        $this->startRegister();
-        $this->log();
+        self::startGateWay();
+        self::startBusinessWorker();
+        self::startRegister();
+        self::log();
 
         Worker::runAll();
     }
 
-    private function startGateWay(): void
+    private static function startGateWay(): void
     {
         $worker_man = config('services.worker_man');
         //gateway进程
@@ -77,7 +45,7 @@ class WorkerManCommand extends Command
         $gateway->registerAddress = $worker_man['register_address'];
     }
 
-    private function startBusinessWorker(): void
+    private static function startBusinessWorker(): void
     {
         $register_address = config('services.worker_man.register_address');
         $worker = new BusinessWorker();
@@ -91,13 +59,13 @@ class WorkerManCommand extends Command
         $worker->eventHandler = WorkermanEvents::class;
     }
 
-    private function startRegister(): void
+    private static function startRegister(): void
     {
         $register_service = config('services.worker_man.register_service');
         new Register($register_service);
     }
 
-    private function log(): void
+    private static function log(): void
     {
         if (! config('services.worker_man.log')) {
             return;

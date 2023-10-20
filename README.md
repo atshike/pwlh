@@ -1,6 +1,23 @@
 # pwlh
 workerman PHP聊天室 Websocket + HTLM5+PHP多进程socket
 
+```angular2html
+composer require atshike/pwlh
+
+php artisan make:command WorkerManCommand
+
+global $argv;
+$action = $this->argument('action');
+if (! in_array($action, ['status', 'start', 'stop', 'restart', 'reload', 'connections'])) {
+exit("action invalid! \n");
+}
+$argv[0] = 'wk';
+$argv[1] = $action;
+$argv[2] = $this->option('d') ? '-d' : '';
+
+WorkerManService::start();
+
+```
 
 ```angular2html
 安装workerman
