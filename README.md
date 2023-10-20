@@ -1,11 +1,15 @@
-# pwlh
-workerman PHP聊天室 Websocket + HTLM5+PHP多进程socket
+# workerman 聊天室 Websocket + HTLM5+PHP多进程socket
 
-```angular2html
+### 安装
+```
 composer require atshike/pwlh
-
+```
+### 生成command
+```
+1.
 php artisan make:command WorkerManCommand
 
+2.
 global $argv;
 $action = $this->argument('action');
 if (! in_array($action, ['status', 'start', 'stop', 'restart', 'reload', 'connections'])) {
@@ -16,25 +20,22 @@ $argv[1] = $action;
 $argv[2] = $this->option('d') ? '-d' : '';
 
 WorkerManService::start();
+```
+### 配置文件
+- config/service.php
+```
+'worker_man' => [
+    'port' => env('WORKER_MAN_PORT', 2346),
+    'start_port' => env('WORKER_MAN_START_PORT', 2300),
+    'log' => env('WORKER_MAN_LOG', 1),
+    'register_service' => env('REGISTER_SERVICE', 'text://0.0.0.0:1236'),
+    'register_address' => env('REGISTER_ADDRESS', '127.0.0.1:1236'),
+],
 
 ```
-
-```angular2html
-安装workerman
-composer require workerman/gateway-worker
-php artisan app:workman start --d
+### 进程守候
+- 配置 Supervisor
 ```
-
-
-```angular2html
-代码格式
-composer require laravel/pint --dev
-./vendor/bin/pint
-```
-
-```angular2html
-进程守候  
-配置 Supervisor
 cd /etc/supervisor/conf.d
 vim laravel-worker.conf
 
